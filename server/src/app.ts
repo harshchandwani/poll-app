@@ -3,8 +3,14 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
+
 import { createClient } from 'redis';
+
+// Import routes
+// Note: Ensure that the paths to your routes are correct based on your project structure.
 import authRoutes from './routes/auth.routes';
+import pollRoutes from './routes/poll.routes';
+
 
 // Load environment variables from .env file
 dotenv.config();
@@ -18,6 +24,7 @@ app.use(cors());
 // Parse incoming JSON requests
 app.use(express.json());
 app.use('/api/auth', authRoutes);
+app.use('/api/polls', pollRoutes);
 
 // ----------------------
 // MongoDB Connection
