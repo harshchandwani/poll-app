@@ -8,6 +8,11 @@ export const createPollSchema = z.object({
         .min(2, 'At least two options are required'),
 });
 
+// Validation schema for voting in a poll
+export const votePollSchema = z.object({
+    option: z.string().min(1, 'Option is required'),
+});
 
 // TypeScript type for the input based on the validation schema
 export type CreatePollInput = z.infer<typeof createPollSchema>;
+export type VotePollInput = z.infer<typeof votePollSchema>;

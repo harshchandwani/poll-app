@@ -35,6 +35,7 @@ mongoose.connect(process.env.MONGO_URI || '')
         console.error('❌ MongoDB connection error:', err);
         process.exit(1); // Exit if DB connection fails
     });
+
 // ----------------------
 // Redis Client Setup
 // ----------------------
@@ -62,6 +63,7 @@ app.get('/', (_req, res) => {
 // Start Server
 // ----------------------
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
     console.log(`🚀 Server started on port ${PORT}`);
 });
