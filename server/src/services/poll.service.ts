@@ -47,3 +47,13 @@ export const getAllPollsService = async () => {
 
     return polls;
 };
+
+// Service to get all polls by user
+// This function retrieves all polls created by a specific user, sorted by creation date in descending order.
+export const getAllPollsByUserService = async (userId: string) => {
+    const polls = await Poll.find({ createdBy: userId })
+        .sort({ createdAt: -1 }) // recent first
+        .populate('createdBy', 'email'); // optional: return creator's email
+
+    return polls;
+}

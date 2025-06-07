@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { createPollSchema, votePollSchema } from '../validations/poll.validation';
-import { createPollService, getAllPollsService, votePollService } from '../services/poll.service';
+import { createPollService, getAllPollsByUserService, getAllPollsService, votePollService } from '../services/poll.service';
 import { AuthenticationRequest } from '../middleware/auth.middleware';
 
 // Controller to create a new poll
@@ -45,3 +45,15 @@ export const getAllPolls = async (req: AuthenticationRequest, res: Response) => 
         return res.status(500).json({ error: 'Something went wrong' });
     }
 }
+
+// Controller to get all polls by user
+// This function retrieves all polls created by the authenticated user and returns them in the response.
+export const getAllPollsByUser = async (req: AuthenticationRequest, res: Response) => {
+    try {
+        const polls = await getAllPollsByUserService(req.user!.userId);
+        return res.status(200).json(polls);
+    } catch (err: any) {
+        console.error('Error fetching user polls:', err);
+        return res.status(500).json({ error: 'Something went wrong' });
+    }
+};
